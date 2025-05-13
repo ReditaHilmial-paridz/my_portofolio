@@ -1,210 +1,412 @@
 <template>
-      <div class="w-full sticky z-10 top-0 glass text-black shadow">
-      <div class="navbar">
-        <div class="navbar-start">
-          <div class="dropdown">
-            <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
-              </svg>
-            </div>
-            <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-              <li>
-              <a href="#beranda">About</a>
-          </li>
-          <li>
-            <a href="#project">Project</a>
-          </li>
-          <li>
-            <a href="#contact">Contact</a>
-          </li>
-            </ul>
-          </div>
-            <div>RH</div>
-
+  <!-- Modern Glass Navigation -->
+  <nav class="w-full fixed z-50 top-0 backdrop-blur-md bg-white/80 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16 items-center">
+        <div class="flex items-center">
+          <div class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-500 bg-clip-text text-transparent">RH.</div>
         </div>
-        <div class="navbar-end hidden lg:flex">
-          <ul class="menu menu-horizontal px-1">
-            <li>
-              <div class="dropdown dropdown-bottom dropdown-end dropdown-hover">
-              </div>
-            </li>
-            <li>
-              <a href="#beranda">About</a>
-          </li>
-          <li>
-            <a href="#project">Project</a>
-          </li>
-          <li>
-            <a href="#contact">Contact</a>
-          </li>
-          </ul>
+        <div class="hidden md:flex space-x-8">
+          <a v-for="nav in navigation" :key="nav.id" :href="nav.href" 
+             class="text-gray-700 hover:text-indigo-600 font-medium transition-colors">
+            {{ nav.name }}
+          </a>
         </div>
-      </div>
-    </div>
-
-    <section id="beranda">
-      <div class="hero bg-gradient-to-r from-blue-200 via-teal-300 to-indigo-200 min-h-screen animate-gradient-x">
-        <div class="hero-content flex-col lg:flex-row">
-          <div class="avatar">
-            <div class="w-96 rounded-full grid-cols-4" style="object-fit: cover;">
-              <img src="/public/assets/me.png" />
-            </div>
-          </div>
-          <div>
-            <h1 class="text-5xl font-bold">Redita Hilmi Al-paridz</h1>
-            <p class="py-6">
-              I am a passionate junior web developer dedicated to crafting clean and responsive websites. 
-              With a strong foundation in modern web technologies, I aim to bring ideas to life through code and creativity.
-            </p>
-            <p class="py-2 text-lg">
-              Let’s build something amazing together!
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="project">
-    <div class="hero min-h-screen mx-auto px-8 lg:px-35" style="padding-bottom: 10px;">
-  <div class="flex flex-col items-center">
-    <h1 class="text-4xl font-bold mb-4">Project</h1>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div v-for="project in projects" :key="project.id" class="card bg-base-100 w-full max-w-sm shadow-xl bg-gray-100 mx-auto">
-        <figure class="m-0">
-          <img :src="project.image" :alt="project.name" class="rounded-xl" />
-        </figure>
-        <div class="card-body items-center text-center p-4">
-          <h2 class="card-title">{{ project.name }}</h2>
-          <p>{{ project.deskripsi }}</p>
-          <div class="card-actions">
-            <a :href="project.subject" class="btn btn-primary">Lihat</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
-    </section>
-    <section id="contact" class="bg-gray-100 py-12">
-  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Contact Me</h2>
-    <div class="bg-white shadow-md rounded-lg p-6">
-      <form action="#" method="POST" class="space-y-6">
-        <div>
-          <label for="name" class="block text-sm font-medium text-gray-700">Your Name</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            required
-            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            placeholder="Name"
-          />
-        </div>
-        <div>
-          <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            required
-            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            placeholder="you@example.com"
-          />
-        </div>
-        <div>
-          <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
-          <textarea
-            id="message"
-            name="message"
-            rows="4"
-            required
-            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            placeholder="Write your message here..."
-          ></textarea>
-        </div>
-        <div class="text-center">
-          <button
-            type="submit"
-            class="px-6 py-2 text-white bg-indigo-600 hover:bg-indigo-700 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-          >
-            Send Message
+        <div class="md:hidden">
+          <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-gray-700">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                    d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
           </button>
         </div>
-      </form>
+      </div>
     </div>
-    <div class="mt-8 text-center text-gray-600">
-      <p>Or reach me on</p>
-      <div class="flex justify-center space-x-4 mt-4">
-        <a href="https://www.linkedin.com/in/redita-hilmi-al-paridz-a71421347/" class="text-gray-800 hover:text-indigo-600">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M22.225 0H1.775C.795 0 0 .795 0 1.775v20.45C0 23.205.795 24 1.775 24h20.45c.98 0 1.775-.795 1.775-1.775V1.775C24 .795 23.205 0 22.225 0zM7.005 20.285H3.88V9h3.125v11.285zm-1.562-13.038c-1.002 0-1.78-.815-1.78-1.818s.778-1.818 1.78-1.818c1.004 0 1.78.815 1.78 1.818s-.776 1.818-1.78 1.818zm14.66 13.038h-3.125v-5.25c0-1.25-.022-2.857-1.875-2.857-1.878 0-2.165 1.466-2.165 2.976v5.131h-3.125v-11.285h3.125v1.544h.045c.444-.832 1.537-1.715 3.164-1.715 3.386 0 4.008 2.23 4.008 5.132v6.324z"/>
-          </svg>
-        </a>
-        <a href="https://www.instagram.com/reditahilmi" class="text-gray-800 hover:text-indigo-600">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 2.163c3.2 0 3.582.012 4.85.07 1.17.058 2.036.248 2.635.537.596.288 1.06.652 1.506 1.097.446.445.81.91 1.097 1.506.289.599.479 1.465.537 2.635.058 1.268.07 1.65.07 4.85s-.012 3.582-.07 4.85c-.058 1.17-.248 2.036-.537 2.635-.288.596-.652 1.06-1.097 1.506-.445.446-.91.81-1.506 1.097-.599.289-1.465.479-2.635.537-1.268.058-1.65.07-4.85.07s-3.582-.012-4.85-.07c-1.17-.058-2.036-.248-2.635-.537-.596-.288-1.06-.652-1.506-1.097-.445-.445-.81-.91-1.097-1.506-.289-.599-.479-1.465-.537-2.635-.058-1.268-.07-1.65-.07-4.85s.012-3.582.07-4.85c.058-1.17.248-2.036.537-2.635.288-.596.652-1.06 1.097-1.506.445-.446.91-.81 1.506-1.097.599-.289 1.465-.479 2.635-.537 1.268-.058 1.65-.07 4.85-.07zm0-2.163c-3.253 0-3.644.012-4.92.071-1.283.058-2.234.248-3.097.537-.854.289-1.597.666-2.35 1.419-.753.754-1.131 1.497-1.419 2.35-.289.863-.479 1.814-.537 3.097-.059 1.276-.071 1.667-.071 4.92s.012 3.644.071 4.92c.058 1.283.248 2.234.537 3.097.288.854.666 1.597 1.419 2.35.753.753 1.497 1.131 2.35 1.419.863.289 1.814.479 3.097.537 1.276.059 1.667.071 4.92.071s3.644-.012 4.92-.071c1.283-.058 2.234-.248 3.097-.537.854-.288 1.597-.666 2.35-1.419.753-.753 1.131-1.497 1.419-2.35.289-.863.479-1.814.537-3.097.059-1.276.071-1.667.071-4.92s-.012-3.644-.071-4.92c-.058-1.283-.248-2.234-.537-3.097-.288-.854-.666-1.597-1.419-2.35-.753-.753-1.497-1.131-2.35-1.419-.863-.289-1.814-.479-3.097-.537-1.276-.059-1.667-.071-4.92-.071zm0 5.838c-3.41 0-6.184 2.774-6.184 6.184s2.774 6.184 6.184 6.184 6.184-2.774 6.184-6.184-2.774-6.184-6.184-6.184zm0 10.184c-2.218 0-4.184-1.966-4.184-4.184s1.966-4.184 4.184-4.184 4.184 1.966 4.184 4.184-1.966 4.184-4.184 4.184zm5.907-9.217c0 .77-.623 1.394-1.394 1.394-.771 0-1.394-.623-1.394-1.394 0-.77.623-1.394 1.394-1.394.771 0 1.394.623 1.394 1.394z"/>
-          </svg>
-        </a>
-        <a href="https://github.com/ReditaHilmial-paridz" class="text-gray-800 hover:text-indigo-600">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.304 3.438 9.8 8.205 11.397.6.11.82-.26.82-.577 0-.285-.01-1.038-.015-2.037-3.338.727-4.039-1.612-4.039-1.612-.547-1.39-1.334-1.757-1.334-1.757-1.091-.744.083-.73.083-.73 1.21.087 1.846 1.242 1.846 1.242 1.075 1.842 2.823 1.309 3.513.998.11-.779.42-1.308.764-1.609-2.667-.307-5.467-1.334-5.467-5.926 0-1.307.468-2.38 1.236-3.22-.124-.308-.535-.926.117-1.91 0 0 1.008-.322 3.309 1.23C9.62 7.396 10.804 7 12 7c1.196 0 2.38.396 3.178.946 2.301-1.553 3.309-1.23 3.309-1.23.653.984.241 1.602.117 1.91.768.84 1.236 1.913 1.236 3.22 0 4.595-2.802 5.618-5.47 5.92.43.372.818 1.104.818 2.226 0 1.61-.015 2.91-.015 3.295 0 .318.217.692.82.577C20.565 21.799 24 17.304 24 12c0-6.63-5.37-12-12-12z"/>
-          </svg>
+    
+    <!-- Mobile menu -->
+    <div v-if="mobileMenuOpen" class="md:hidden bg-white shadow-lg">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <a v-for="nav in navigation" :key="nav.id" :href="nav.href" 
+           class="block px-3 py-2 text-gray-700 hover:text-indigo-600 hover:bg-gray-50">
+          {{ nav.name }}
         </a>
       </div>
-
-        <p>Copyright © by Redita</p>
     </div>
-  </div>
-</section>
+  </nav>
 
+  <!-- Hero Section -->
+  <section id="beranda" class="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-br from-blue-50 to-indigo-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center">
+        <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
+          <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+            Hi, I'm <span class="text-indigo-600">Redita Hilmi</span>
+          </h1>
+          <h2 class="text-2xl md:text-3xl font-semibold text-gray-700 mb-6">
+            Frontend Developer & UI Enthusiast
+          </h2>
+          <p class="text-lg text-gray-600 mb-8">
+            I build exceptional digital experiences with Vue.js and modern web technologies.
+            Passionate about creating intuitive interfaces that users love.
+          </p>
+          <div class="flex space-x-4">
+            <a href="#contact" class="btn-primary">
+              Contact Me
+            </a>
+            <a href="#project" class="btn-secondary">
+              View Projects
+            </a>
+          </div>
+        </div>
+        <div class="md:w-1/2 flex justify-center">
+          <div class="relative">
+            <img src="/public/assets/me.png" alt="Redita Hilmi" 
+                 class="w-64 h-64 md:w-80 md:h-80 rounded-full object-cover border-4 border-white shadow-xl">
+            <div class="absolute -bottom-4 -right-4 bg-indigo-100 p-3 rounded-full shadow-md">
+              <div class="bg-indigo-600 text-white p-2 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- Skills Section - Designed to Impress HR -->
+  <section id="skills" class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <span class="text-indigo-600 font-semibold">MY CAPABILITIES</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">Professional Skills</h2>
+        <p class="max-w-2xl mx-auto text-gray-600">
+          I've honed these skills through various projects and continuous learning. Here's what I bring to your team:
+        </p>
+      </div>
 
-  </template>
-  <style>
-html{
-  scroll-behavior: smooth;
-}
-  @keyframes gradient-x {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-  .animate-gradient-x {
-    background-size: 200% 200%;
-    animation: gradient-x 8s ease infinite;
-  }
-</style>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <!-- Technical Skills -->
+        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+          <div class="flex items-center mb-8">
+            <div class="bg-indigo-100 p-3 rounded-lg mr-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-800">Technical Expertise</h3>
+          </div>
+          
+          <div class="space-y-6">
+            <div v-for="skill in technicalSkills" :key="skill.id" class="skill-item group">
+              <div class="flex justify-between mb-2">
+                <span class="font-medium text-gray-700 group-hover:text-indigo-600 transition-colors">{{ skill.name }}</span>
+                <span class="text-indigo-600 font-medium">{{ skill.level }}%</span>
+              </div>
+              <div class="w-full bg-gray-200 rounded-full h-2.5">
+                <div class="bg-indigo-600 h-2.5 rounded-full" 
+                     :style="{ width: skill.level + '%' }"
+                     :class="{'animate-[pulse_1.5s_infinite]': skill.level > 85}"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Professional Skills -->
+        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+          <div class="flex items-center mb-8">
+            <div class="bg-indigo-100 p-3 rounded-lg mr-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-800">Professional Strengths</h3>
+          </div>
+          
+          <div class="space-y-6">
+            <div v-for="skill in professionalSkills" :key="skill.id" class="skill-item group">
+              <div class="flex justify-between mb-2">
+                <span class="font-medium text-gray-700 group-hover:text-indigo-600 transition-colors">{{ skill.name }}</span>
+                <span class="text-indigo-600 font-medium">{{ skill.level }}%</span>
+              </div>
+              <div class="w-full bg-gray-200 rounded-full h-2.5">
+                <div class="bg-indigo-600 h-2.5 rounded-full" 
+                     :style="{ width: skill.level + '%' }"
+                     :class="{'animate-[pulse_1.5s_infinite]': skill.level > 75}"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="project" class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <span class="text-indigo-600 font-semibold">MY WORK</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">Featured Projects</h2>
+        <p class="max-w-2xl mx-auto text-gray-600">
+          Here are some of my recent projects that demonstrate my skills and capabilities.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div v-for="project in projects" :key="project.id" 
+             class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow group">
+          <div class="relative overflow-hidden h-48">
+            <img :src="project.image" :alt="project.name" 
+                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+            <div class="absolute bottom-4 left-4">
+              <span class="bg-indigo-600 text-white text-xs font-medium px-2.5 py-0.5 rounded">Featured</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-2">{{ project.name }}</h3>
+            <p class="text-gray-600 mb-4">{{ project.deskripsi }}</p>
+            <div class="flex justify-between items-center">
+              <a :href="project.subject" target="_blank" 
+                 class="text-indigo-600 hover:text-indigo-800 font-medium flex items-center">
+                View Project
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+              <div class="flex space-x-2">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <span class="text-indigo-600 font-semibold">GET IN TOUCH</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">Let's Work Together</h2>
+        <p class="max-w-2xl mx-auto text-gray-600">
+          Interested in working together or have any questions? Feel free to reach out!
+        </p>
+      </div>
+
+      <div class="max-w-3xl mx-auto bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 shadow-sm">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">Contact Information</h3>
+            <div class="space-y-4">
+              <div class="flex items-start">
+                <div class="bg-indigo-100 p-2 rounded-lg mr-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-medium text-gray-700">Email</h4>
+                  <a href="mailto:your.email@example.com" class="text-indigo-600 hover:underline">redita.hilmi@example.com</a>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="bg-indigo-100 p-2 rounded-lg mr-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-medium text-gray-700">Phone</h4>
+                  <a href="tel:+1234567890" class="text-indigo-600 hover:underline">+62 812 3456 7890</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-8">
+              <h3 class="text-xl font-semibold text-gray-800 mb-4">Connect With Me</h3>
+              <div class="flex justify-center space-x-6">
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/in/redita-hilmi-al-paridz-a71421347/" 
+           class="text-gray-700 hover:text-blue-600 transition-colors duration-300">
+          <span class="sr-only">LinkedIn</span>
+          <i class="fab fa-linkedin text-3xl"></i>
+        </a>
+        
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/reditahilmi" 
+           class="text-gray-700 hover:text-pink-600 transition-colors duration-300">
+          <span class="sr-only">Instagram</span>
+          <i class="fab fa-instagram text-3xl"></i>
+        </a>
+        
+        <!-- GitHub -->
+        <a href="https://github.com/ReditaHilmial-paridz" 
+           class="text-gray-700 hover:text-gray-900 transition-colors duration-300">
+          <span class="sr-only">GitHub</span>
+          <i class="fab fa-github text-3xl"></i>
+        </a>
+        
+        <!-- Email -->
+        <a href="mailto:your.email@example.com" 
+           class="text-gray-700 hover:text-red-600 transition-colors duration-300">
+          <span class="sr-only">Email</span>
+          <i class="fas fa-envelope text-3xl"></i>
+        </a>
+      </div>
+            </div>
+          </div>
+
+          <div>
+            <form action="https://formspree.io/f/xyzwdyyq" method="POST">
+              <div class="space-y-4">
+                <div>
+                  <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nama Anda</label>
+                  <input type="text" id="name" name="name" required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+                <div>
+                  <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Anda</label>
+                  <input type="email" id="email" name="email" required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+                <div>
+                  <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Pesan</label>
+                  <textarea id="message" name="message" rows="4" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+                </div>
+                <button type="submit" 
+                        class="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition-colors font-medium">
+                  Kirim Pesan
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-8">
+      <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400 text-sm">
+        <p>© {{ new Date().getFullYear() }} Redita Hilmi Al-paridz. All rights reserved.</p>
+      </div>
+  </footer>
+</template>
+
 <script setup>
+import { ref } from 'vue';
 
+const mobileMenuOpen = ref(false);
 
-// Data guru dengan properti `image`
+const navigation = [
+  { id: 1, name: 'About', href: '#beranda' },
+  { id: 2, name: 'Skills', href: '#skills' },
+  { id: 3, name: 'Projects', href: '#project' },
+  { id: 4, name: 'Contact', href: '#contact' },
+];
+
 const db_projects = ref([
   {
     id: 1,
-    name: 'WEB SEKOLAH',
-    deskripsi:'Website ini dirancang untuk menjadi pusat informasi utama mengenai SMKN 4 TASIKMALAYA',
-    subject:'https://github.com/ReditaHilmial-paridz/ujikom-final',
+    name: 'School Website',
+    deskripsi: 'Comprehensive website for SMKN 4 TASIKMALAYA with information portal and admin dashboard.',
+    subject: 'https://ujikom-final.vercel.app/',
     image: '/assets/project1.png'
   },
   {
     id: 2,
-    name: 'SPW DIGITAL',
-    deskripsi:'Website kantin ini dirancang untuk mendukung efisiensi operasional kantin sekolah.',
-    subject:'https://github.com/ReditaHilmial-paridz/SPW_CANTEEN',
-    image:'/assets/project2.png'  
+    name: 'Digital Canteen',
+    deskripsi: 'SPW Digital streamlines school canteen operations with order management and reporting.',
+    subject: 'hhttps://spw-canteen.vercel.app/',
+    image: '/assets/project2.png'  
   },
   {
     id: 3,
-    name: 'PERPUSTAKAAN DIGITAL',
-    deskripsi:'website ini dirancang untuk membantu pengunjung dalam mengisi buku kunjungan supaya lebih cepat',
-    subject:'https://github.com/ReditaHilmial-paridz/Tefa-perpus-digital',
+    name: 'Digital Library',
+    deskripsi: 'Modern library system with digital visitor book and book management features.',
+    subject: 'https://tefa-redita.vercel.app/',
     image: '/assets/project3.png'
   },
-    ]);
-const projects = ref([...db_projects.value]); // Semua data diambil
+  {
+    id: 4,
+    name: 'ecosphere',
+    deskripsi: 'for child',
+    subject: 'https://ecosphere-fun.vercel.app/',
+    image: '/assets/project4.png'
+  },
+]);
 
+const projects = ref([...db_projects.value]);
+
+const db_technicalSkills = ref([
+  { id: 1, name: 'Vue.js', level: 80 },
+  { id: 2, name: 'JavaScript', level: 83 },
+  { id: 3, name: 'HTML5', level: 87 },
+  { id: 4, name: 'CSS3', level: 85},
+  { id: 5, name: 'Figma', level: 80},
+  { id: 6, name: 'Excel', level: 81}
+]);
+
+const db_professionalSkills = ref([
+  { id: 7, name: 'Problem Solving', level: 80},
+  { id: 8, name: 'Teamwork', level: 87},
+  { id: 9, name: 'Communication', level: 80},
+  { id: 10, name: 'Project Management', level: 78},
+  { id: 11, name: 'Creativity', level: 76},
+  { id: 12, name: 'Adaptability', level: 75}
+]);
+
+const technicalSkills = ref([...db_technicalSkills.value]);
+const professionalSkills = ref([...db_professionalSkills.value]);
 
 </script>
+
+<style>
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Inter', sans-serif;
+}
+
+.btn-primary {
+  @apply bg-indigo-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-indigo-700 transition-colors shadow-sm hover:shadow-md;
+}
+
+.btn-secondary {
+  @apply border border-indigo-600 text-indigo-600 px-6 py-3 rounded-lg font-medium hover:bg-indigo-50 transition-colors shadow-sm hover:shadow-md;
+}
+
+/* Animation for skill bars with >85% */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.animate-\[pulse_1\.5s_infinite\] {
+  animation: pulse 1.5s infinite;
+}
+
+/* Smooth transitions */
+.transition-colors {
+  transition-property: color, background-color, border-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.transition-shadow {
+  transition-property: box-shadow;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.transition-transform {
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+</style>
