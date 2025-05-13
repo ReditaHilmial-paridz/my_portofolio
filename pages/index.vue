@@ -208,7 +208,7 @@
                 </div>
                 <div>
                   <h4 class="font-medium text-gray-700">Email</h4>
-                  <a href="mailto:your.email@example.com" class="text-indigo-600 hover:underline">redita.hilmi@example.com</a>
+                  <a href="mailto:your.email@example.com" class="text-indigo-600 hover:underline">reditahilmialparidz@gmail.com</a>
                 </div>
               </div>
               <div class="flex items-start">
@@ -219,7 +219,7 @@
                 </div>
                 <div>
                   <h4 class="font-medium text-gray-700">Phone</h4>
-                  <a href="tel:+1234567890" class="text-indigo-600 hover:underline">+62 812 3456 7890</a>
+                  <a href="tel:+1234567890" class="text-indigo-600 hover:underline">+628955802210066</a>
                 </div>
               </div>
             </div>
@@ -249,7 +249,7 @@
         </a>
         
         <!-- Email -->
-        <a href="mailto:your.email@example.com" 
+        <a href="mailto:reditahilmialparidz@gmail.com" 
            class="text-gray-700 hover:text-red-600 transition-colors duration-300">
           <span class="sr-only">Email</span>
           <i class="fas fa-envelope text-3xl"></i>
