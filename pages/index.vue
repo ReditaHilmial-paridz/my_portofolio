@@ -333,7 +333,7 @@ const db_projects = ref([
   {
     id: 4,
     name: 'ecosphere',
-    deskripsi: 'for child',
+    deskripsi: 'This website is designed to help children learn to protect nature in a fun way',
     subject: 'https://ecosphere-fun.vercel.app/',
     image: '/assets/project4.png'
   },
